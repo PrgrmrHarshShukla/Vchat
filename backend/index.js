@@ -1,23 +1,20 @@
 const express = require("express");
 const cors = require("cors");
+
+
+// WebSocket server set up
+
 const http = require("http");
-const { Server } = require("socket.io");
-
-
-const app = express();
-// app.use(express.json());
-app.use(cors());
-
-const server = http.createServer(app);
-
-const io = new Server(server, {
-    cors: {
-        origin: "http://localhost:5173",
-        methods: ["GET", "POST"],
-    },
-});
+const socketIo = require("socket.io");
+const server = http.createServer();
+const io = socketIo(server, {
+    cors: { origin: "*" }
+})
 
 io.on("connection", (socket) => {
+    // console.log(socket, "\n Now \n");
+    // console.log(socket.protocol);
+    // console.log(socket.id);
     console.log(`User connected: ${socket.id}`);
 
     socket.on("join_room", (data) => {
@@ -30,13 +27,21 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        console.log("User disconnected", socket.id);
+        console.log("User disconnected: ", socket.id);
     });
 });
 
 
 
 
-server.listen(3001, () => {
-    console.log("server is running");
+server.listen(5000, () => {
+    console.log("WebSocket server is running on port 5000...");
 });
+
+
+
+
+const app = express();
+app.use(express.json());
+
+app.use(cors());
