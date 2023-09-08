@@ -5,7 +5,10 @@ const http = require("http");
 const socketIo = require("socket.io");
 const server = http.createServer();
 const io = socketIo(server, {
-    cors: { origin: "*" }
+    cors: {
+        origin: "https://fire-chat-access.netlify.app",
+        methods: ["GET", "POST"] 
+    }
 })
 
 io.on("connection", (socket) => {
