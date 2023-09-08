@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import io from "socket.io-client";
-const socket = io(process.env.REACT_APP_API_URL);
+const socket = io("https://vchat-backend-zv0s.onrender.com");
 
 import './App.css';
 import Chat from './Chat';
