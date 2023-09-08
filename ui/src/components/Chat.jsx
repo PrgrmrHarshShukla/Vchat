@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 
 import '@fortawesome/fontawesome-free/css/all.css'
+import { v4 as uuidv4 } from 'uuid'
 
 
 
@@ -9,12 +10,15 @@ function Chat({ socket, username, room }) {
 
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState(
-    JSON.parse(localStorage.getItem(`${username}${room}`)) || []
+    JSON.parse(localStorage.getItem(`${username}${room}`)) 
+    || 
+    []
   );
 
 
-  const sendMessage = async() => {
+  const sendMessage = async () => {
     if( currentMessage !== "" ) {
+      // console.log(currentMessage.timeStamp);
       const messageData = {
         room: room,
         author: username,
@@ -24,7 +28,7 @@ function Chat({ socket, username, room }) {
 
       await socket.emit("send_message", messageData);
       // console.log("from Chat", socket.id);
-      setMessageList((list) => {
+      setMessageList(list => {
         localStorage.setItem(
           `${username}${room}`,
           JSON.stringify([...list, messageData])      
@@ -38,7 +42,7 @@ function Chat({ socket, username, room }) {
   };
 
 
-  const handleReset = async () => {
+  const handleReset = () => {
     localStorage.removeItem(`${username}${room}`)
     setMessageList([]);
   }
@@ -58,17 +62,17 @@ function Chat({ socket, username, room }) {
           <strong><h1>FireChat</h1></strong>
          </div>
          <div title="Reset Chat" onClick={handleReset}>
-          <i className="fas fa-trash"></i>
+          <i className="fas fa-trash active:translate-y-[5px]"></i>
          </div>
       </div>
 
 
 
       <div className="min-h-10/12 h-full w-full bg-gray-200 border-t-2 border-b-2 border-black overflow-auto p-2">
-        {messageList.map((messageContent, index) => {
+        {messageList.map((messageContent) => {
           return (
             username === messageContent.author ? (
-            <div key={index} className="max-w-[1/2] flex flex-col justify-end items-end">
+            <div key={uuidv4()} className="max-w-[1/2] flex flex-col justify-end items-end">
               <div className="flex flex-row gap-4 justify-start">
                 <h5 className="text-[12px]">{messageContent.time}</h5>
                 <h5 className="text-[12px] font-semibold">You</h5>
@@ -80,12 +84,12 @@ function Chat({ socket, username, room }) {
             )
             : 
             (
-            <div key={index} className="flex flex-col items-start max-w-[1/2]">
+            <div key={uuidv4()} className="flex flex-col items-start max-w-[1/2]">
               <div className="flex flex-row gap-4 justify-start">
                 <h5 className="text-[12px] font-semibold">{messageContent.author}</h5>
                 <h5 className="text-[12px]">{messageContent.time}</h5>
               </div>
-              <div className="bg-white max-w-max break-words p-1 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] mb-4">
+              <div className="bg-white max-w-[80vw] break-words p-1 rounded-tr-[10px] rounded-br-[10px] rounded-bl-[10px] mb-4">
                 <h4>{messageContent.message}</h4>
               </div>
             </div>

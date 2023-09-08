@@ -1,6 +1,3 @@
-const express = require("express");
-const cors = require("cors");
-
 
 // WebSocket server set up
 
@@ -12,14 +9,11 @@ const io = socketIo(server, {
 })
 
 io.on("connection", (socket) => {
-    // console.log(socket, "\n Now \n");
-    // console.log(socket.protocol);
-    // console.log(socket.id);
-    console.log(`User connected: ${socket.id}`);
+    // console.log(`User connected: ${socket.id}`);
 
     socket.on("join_room", (data) => {
         socket.join(data);
-        console.log(`User with ID: ${socket.id} joined room: ${data}`);
+        // console.log(`User with ID: ${socket.id} joined room: ${data}`);
     });
 
     socket.on("send_message", (data) => {
@@ -32,16 +26,7 @@ io.on("connection", (socket) => {
 });
 
 
-
-
 server.listen(5000, () => {
     console.log("WebSocket server is running on port 5000...");
 });
 
-
-
-
-const app = express();
-app.use(express.json());
-
-app.use(cors());
