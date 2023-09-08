@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import io from "socket.io-client";
-const socket = io("https://vchat-backend-zv0s.onrender.com");
+const socket = io("wss://vchat-backend-zv0s.onrender.com");
 
 import './App.css';
 import Chat from './Chat';
