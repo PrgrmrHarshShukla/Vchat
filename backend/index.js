@@ -5,9 +5,7 @@ const http = require("http");
 const socketIo = require("socket.io");
 const server = http.createServer((req, res) => {
     if(req.url === '/'){
-        res.json({
-            msg: "Welcome"
-        });
+        res.end("Welcome to FireChat");
     }
 });
 
