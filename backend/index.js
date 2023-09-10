@@ -9,6 +9,8 @@ const server = http.createServer((req, res) => {
     }
 });
 
+const PORT = process.env.PORT || 5000
+
 
 // Adding CORS headers to allow requests from frontend domain
 server.on('request', (req, res) => {
@@ -45,7 +47,7 @@ io.on("connection", (socket) => {
 });
 
 
-server.listen(5000, () => {
-    console.log("WebSocket server is running on port 5000...");
+server.listen(PORT, () => {
+    console.log(`WebSocket server is running on port ${PORT}...`);
 });
 
