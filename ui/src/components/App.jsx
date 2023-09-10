@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import io from "socket.io-client";
-const socket = io("https://vchat-backend-zv0s.onrender.com");
+const socket = io('https://vchat-backend-zv0s.onrender.com', {
+    transports: ['websocket'], // Use WebSocket transport
+});
 
 import './App.css';
 import Chat from './Chat';
