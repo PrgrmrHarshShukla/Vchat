@@ -39,11 +39,17 @@ router.post('/register', async (req, res) => {
     })
 
     try {
-        const userExists = await Users.findOne({ email: req.body.email })
+        const userExists1 = await Users.findOne({ email: req.body.email })
+        const userExists2 = await Users.findOne({ userName: req.body.userName })
 
-        if(userExists){
+        if(userExists1){
             return res.status(400).json({
                 msg: "Email already in use."
+            })
+        }
+        if(userExists2){
+            return res.status(400).json({
+                msg: "userName already in use."
             })
         }
 
