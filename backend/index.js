@@ -8,7 +8,6 @@ const server = http.createServer((req, res) => {
         res.status(200).send("Welcome");
     }
 });
-const io = socketIo(server)
 
 
 // Adding CORS headers to allow requests from frontend domain
@@ -26,6 +25,7 @@ server.on('request', (req, res) => {
     }
 })
 
+const io = socketIo(server)
 
 io.on("connection", (socket) => {
     // console.log(`User connected: ${socket.id}`);
