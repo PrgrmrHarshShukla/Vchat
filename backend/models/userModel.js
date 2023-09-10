@@ -15,8 +15,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    room: {
-        type: Array
+    rooms: {
+        type: [{type: String}]
     }
 });
 
