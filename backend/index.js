@@ -3,11 +3,7 @@
 
 const http = require("http");
 const socketIo = require("socket.io");
-const server = http.createServer((req, res) => {
-    if(req.url === '/'){
-        res.write("Welcome to FireChat");
-    }
-});
+const server = http.createServer();
 
 const PORT = process.env.PORT || 5000
 
