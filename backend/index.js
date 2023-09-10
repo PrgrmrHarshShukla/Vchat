@@ -3,13 +3,29 @@
 
 const http = require("http");
 const socketIo = require("socket.io");
-const server = http.createServer();
-const io = socketIo(server, {
-    cors: {
-        origin: "https://fire-chat-access.netlify.app",
-        methods: ["GET", "POST"] 
+const server = http.createServer((req, res) => {
+    if(req.url === '/'){
+        res.status(200).send("Welcome");
+    }
+});
+const io = socketIo(server)
+
+
+// Adding CORS headers to allow requests from frontend domain
+server.on('request', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', 'https://fire-chat-access.netlify.app');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+
+    // Handle preflight requests
+    if (req.method === 'OPTIONS') {
+        res.writeHead(204);
+        res.end();
+        return;
     }
 })
+
 
 io.on("connection", (socket) => {
     // console.log(`User connected: ${socket.id}`);
