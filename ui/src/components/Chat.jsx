@@ -57,7 +57,7 @@ function Chat({ socket, username, room }) {
 
   return (
     <div className="flex flex-col justify-between items-center border-[3px] sm:border-[3px] border-black rounded-[3px] sm:h-3/4 sm:w-1/2 w-[98vw] h-[98vh]">
-      <div className="h-1/12 w-full px-4 flex flex-row justify-between items-center border-b-[1px] border-black bg-teal-300">
+      <div className="h-[8vh] w-full px-4 flex flex-row justify-between items-center border-b-[1px] border-black bg-teal-300">
          <div className="text-purple-800 text-[30px]">
           <strong><h1>FireChat</h1></strong>
          </div>
@@ -68,7 +68,7 @@ function Chat({ socket, username, room }) {
 
 
 
-      <div className="min-h-10/12 h-full w-full bg-gray-200 border-t-2 border-b-2 border-black overflow-auto p-2">
+      <div className="h-[82vh] w-full bg-gray-200 border-t-2 border-b-2 border-black overflow-auto p-2">
         {messageList.map((messageContent) => {
           return (
             username === messageContent.author ? (
@@ -100,7 +100,7 @@ function Chat({ socket, username, room }) {
 
 
 
-      <div className="h-1/12 w-full flex flex-row justify-between p-2 border-t-[1px] border-black bg-teal-300">
+      <div className="h-[8vh] w-full flex flex-row justify-between p-2 border-t-[1px] border-black bg-teal-300">
          <input 
           className="border-none rounded text-[20px] p-1 w-10/12 bg-slate-200"
           type="text" 
