@@ -59,7 +59,7 @@ function Chat({ socket, userName, room }) {
     <div className="flex flex-col justify-between items-center border-[3px] sm:border-[3px] border-black rounded-[3px] sm:h-3/4 sm:w-1/2 w-[98vw] h-[98vh]">
       <div className="h-[8vh] w-full px-4 flex flex-row justify-between items-center border-b-[1px] border-black bg-teal-300">
          <div className="text-purple-800 text-[30px]">
-          <strong><h1>FireChat</h1></strong>
+          <strong><h1>FiredChat</h1></strong>
          </div>
          <div title="Reset Chat" onClick={handleReset}>
           <i className="fas fa-trash active:translate-y-[5px]"></i>

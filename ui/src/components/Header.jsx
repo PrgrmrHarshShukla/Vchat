@@ -21,12 +21,19 @@ function Header() {
             <span className="font-bold">{
               user.email != "" 
               ? 
-              <div className="sm:flex-row flex flex-row items-baseline sm:gap-2 cursor-pointer" onClick={handleSignOut}>
-                <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
-                  <span className="mb-[1px] text-violet-800">Sign out</span>
+              <div className="sm:flex-row flex flex-row items-baseline gap-4 cursor-pointer ">
+                <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1">
+                  <Link to = '/roomsList'>
+                    <span className="mb-[1px] text-violet-800">Chat Rooms</span>
+                  </Link>
                 </div>
-                <div className=" block sm:hidden">
-                  <i className="fas fa-sign-out-alt text-[12.5px]"></i>
+                <div  onClick={handleSignOut}>
+                  <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block">
+                    <span className="mb-[1px] text-violet-800">Sign out</span>
+                  </div>
+                  <div className=" block sm:hidden">
+                    <i className="fas fa-sign-out-alt text-xl"></i>
+                  </div>
                 </div>
               </div>
               : 

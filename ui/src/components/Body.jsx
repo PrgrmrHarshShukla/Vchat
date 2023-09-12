@@ -25,7 +25,7 @@ function Body() {
                     What lies at our core?
                 </span>
                 <hr className="border-[1px] border-black sm:w-[48vw] w-[96vw]" />
-                <ul className="text-lg sm:text-4xl font-extrabold sm:ml-[9vw]  text-violet-800">
+                <ul className="text-lg sm:text-4xl font-extrabold sm:ml-[9vw]  text-violet-900">
                     <li>• USER PRIVACY</li>
                     <li>• USER SECURITY</li>
                     <li>• USER CONVENIENCE</li>
