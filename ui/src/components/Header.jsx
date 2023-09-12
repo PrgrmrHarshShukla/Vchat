@@ -39,10 +39,10 @@ function Header() {
               : 
               <Link to = '/login'>
                 <div className="sm:flex-row flex flex-row items-baseline sm:gap-2 cursor-pointer">
-                  <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
+                  <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1 block ">
                     <span className="mb-[1px] text-violet-800">Sign in</span>
                   </div>
-                  <div className=" block sm:hidden">
+                  <div className="hidden">
                     <i className="fas fa-sign-in-alt text-[12.5px]"></i>
                   </div>
                 </div>
