@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setUser } from '../slices/userSlice'
 
 
@@ -12,7 +12,6 @@ function Login() {
 
   const navigate = useNavigate();
 
-  const user = useSelector(state => state.user.value);
 
   const dispatch = useDispatch();
 
@@ -54,10 +53,11 @@ function Login() {
 
     }
     catch(err){
-      console.log("In catch block.\n");
-      alert("An unexpected error occured.")
-      console.error(err.stack);
-      console.error(err.message);
+      // console.log("In catch block.\n");
+      alert("Oops! something was wrong.\nPlease try again.")
+      // alert("Oops! something was wrong.\nPlease try again.")
+      // console.error(err.stack);
+      // console.error(err.message);
     }
   }
 
