@@ -35,7 +35,7 @@ function Body() {
         </div>
         <div className="flex flex-col justify-center items-center w-[90vw] sm:w-[48vw] gap-[3vh]  min-h-[100vh] sm:min-h-[90vh]">
             <img src={chatImage} className="h-[80vh]" />
-            <div className="sm:hidden border-t-[2px] w-[96vw] border-black flex flex-col justify-center items-center">
+            <div className="hidden border-t-[2px] w-[96vw] border-black flex-col justify-center items-center">
                 <div className="mt-[3vh]">
                     Made with 💖 by  {` `}
                     <a href="https://github.com/PrgrmrHarshShukla">
