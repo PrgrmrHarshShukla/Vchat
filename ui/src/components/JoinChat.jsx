@@ -14,11 +14,7 @@ import axios from 'axios';
 function JoinChat() {
 
   const user = useSelector(state => state.user.value)
-
-  const currentRoomHere = user.currentRoom
   
-  const [userName, setUserName] = useState(user.userName);
-  const [userEmail, setUserEmail] = useState(user.email);
   const [showChat, setShowChat] = useState(false);
 
   const dispatch = useDispatch()
@@ -44,9 +40,16 @@ function JoinChat() {
     }
     try{   
       const response = await axios.patch(`https://vchat-backend-zv0s.onrender.com/users/${user.email}`, userDataPatchRequest);
+      dispatch(setUser({
+        userName: user.userName,
+        email: user.email,
+        currentRoom: user.currentRoom,
+        rooms: [...user.rooms, user.currentRoom]
+      }))
   
       if( response.status === 200 ){
-        alert(`New room added to your list.`)
+        // alert(`New room added to your list.`)
+        console.log("New room added to your list.");
       }
   
       }
@@ -66,7 +69,7 @@ function JoinChat() {
 
  
   async function joinRoom () {
-    if( user.currentRoom !== "" && userName !== "" ){ 
+    if( user.currentRoom !== "" && user.userName !== "" ){ 
       socket.emit("join_room", user.currentRoom);
       setShowChat(true);
     }
@@ -89,7 +92,7 @@ function JoinChat() {
           <div className=" flex flex-col justify-center text-left">
 
             <p className="font-semibold">userName</p>
-            <input className="mb-4 p-1 rounded w-full border-2 border-black border-solid" type="text" defaultValue={userName} />
+            <input className="mb-4 p-1 rounded w-full border-2 border-black border-solid" type="text" defaultValue={user.userName} />
             <p className="font-semibold">Chat Room</p>
             <input className="mb-4 p-1 rounded w-full border-2 border-black border-solid" type="text" value={user.currentRoom} onChange={settingRoom} />
             <button 
@@ -104,7 +107,7 @@ function JoinChat() {
         </div>
       ) 
       : 
-      (<Chat socket = {socket} userName = {userName} room = {user.currentRoom} />)
+      (<Chat socket = {socket} userName = {user.userName} room = {user.currentRoom} />)
       }
     </div>
   )

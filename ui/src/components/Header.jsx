@@ -1,10 +1,14 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { clearUser } from "../slices/userSlice";
 
 function Header() {
-  const condition = false;
+  const user = useSelector(state => state.user.value)
+  const dispatch = useDispatch()
   
   const handleSignOut = async () => {
-    console.log("Hello ");
+    dispatch(clearUser());
+    alert("You have signed out of your account.")
   }
 
 
@@ -15,11 +19,10 @@ function Header() {
         
           <div className="flex flex-col">
             <span className="font-bold">{
-            //   "user.email" != "" 
-              condition
+              user.email != "" 
               ? 
               <div className="sm:flex-row flex flex-row items-baseline sm:gap-2 cursor-pointer" onClick={handleSignOut}>
-                <div className="border-[1px] border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
+                <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
                   <span className="mb-[1px] text-violet-800">Sign out</span>
                 </div>
                 <div className=" block sm:hidden">
@@ -29,7 +32,7 @@ function Header() {
               : 
               <Link to = '/login'>
                 <div className="sm:flex-row flex flex-row items-baseline sm:gap-2 cursor-pointer">
-                  <div className="border-[1px] border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
+                  <div className="border-[1px] cursor-pointer border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
                     <span className="mb-[1px] text-violet-800">Sign in</span>
                   </div>
                   <div className=" block sm:hidden">

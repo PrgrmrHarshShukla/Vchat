@@ -34,23 +34,31 @@ function RoomsList() {
     navigate('/joinChat')
   }
 
+  const handleClick = () => {
+    navigate('/')
+  }
+
   return (
-    <div className="w-[100vw] px-[2vw] bg-slate-400 ">
-      <button className="w-[100vw] sm:w-[96vw] h-[8vh] border-b-[2px] border-black text-2xl sm:text-4xl font-bold text-violet-800 bg-teal-200" onClick={createRoom}>
-          <span>
-            Create Room
-          </span>
-      </button>
-      <div className="w-[100vw] sm:w-[96vw] h-auto min-h-[92vh] bg-sky-100">
+    <div className="w-[96vw] mx-[2vw]">
+      <div className="w-[100vw] sm:w-[96vw] h-[8vh] border-b-[2px] border-black bg-teal-200 flex flex-row justify-around items-center" >
+        <span className="text-[35px] text-violet-800 font-bold cursor-pointer" onClick={handleClick}>FiredChat</span>
+          <div
+            className="border-[1px] border-black rounded-[10px] bg-white px-2.5 py-1 max-w-max"
+            onClick={createRoom}
+          >
+            <span className="mb-[1px] font-bold cursor-pointer text-violet-800">Create Room</span>
+          </div>
+      </div>
+      <div className="w-[100vw] sm:w-[96vw] h-auto min-h-[92vh] bg-sky-100 flex justify-center items-center">
       {
         roomsList.length > 0 
         ?
-        <div className="w-[100%] h-auto min-h-[92vh] flex flex-row flex-wrap gap-[2vw] justify-around items-center px-[1vw] py-[2vh]">
+        <div className="w-[98vw] sm:w-[94vw] h-auto min-h-[92vh] flex flex-row flex-wrap gap-[2vw] justify-around items-center px-[1vw] py-[2vh]">
           {list}
         </div>
         : 
         <div className="w-[100vw] sm:w-[96vw] h-[92vh] bg-sky-100 text-center flex flex-col justify-center items-center text-2xl sm:text-4xl">
-          <p className="max-w-[80%]">You seem to have no Chat Rooms yet.</p>
+          <p className="max-w-[80%]">You have no Chat Rooms yet.</p>
           <p className="max-w-[80%]">Create one above.</p>
         </div>
       }
