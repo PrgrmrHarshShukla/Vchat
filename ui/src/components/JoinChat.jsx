@@ -15,22 +15,21 @@ function JoinChat() {
 
   const user = useSelector(state => state.user.value)
 
-  
+  const currentRoomHere = user.currentRoom
   
   const [userName, setUserName] = useState(user.userName);
   const [userEmail, setUserEmail] = useState(user.email);
-  // const [room, setRoom] = useState(currentRoomHere);
   const [showChat, setShowChat] = useState(false);
 
   const dispatch = useDispatch()
 
-  console.log(currentRoomHere, "dcbjc\n");
-  console.log(user.currentRoom);
-
 
   async function joinRoomLogic (e) {
-    console.log(e);
-    if( currentRoomHere === '' ){
+    e.preventDefault()
+    const userRooms = user.rooms
+    const roomExists = userRooms.some(room => room === user.currentRoom)
+    
+    if( !roomExists ){
       patchRooms();
       joinRoom()
     }
@@ -44,7 +43,7 @@ function JoinChat() {
       "newRoom": user.currentRoom
     }
     try{   
-      const response = await axios.patch(`http://localhost:5000/users/user.email/${userEmail}`, userDataPatchRequest);
+      const response = await axios.patch(`https://vchat-backend-zv0s.onrender.com/users/${user.email}`, userDataPatchRequest);
   
       if( response.status === 200 ){
         alert(`New room added to your list.`)
@@ -67,8 +66,8 @@ function JoinChat() {
 
  
   async function joinRoom () {
-    if( room !== "" && userName !== "" ){ 
-      socket.emit("join_room", room);
+    if( user.currentRoom !== "" && userName !== "" ){ 
+      socket.emit("join_room", user.currentRoom);
       setShowChat(true);
     }
     else{
