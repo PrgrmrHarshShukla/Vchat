@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function Header() {
-  const condition = true;
+  const condition = false;
   
   const handleSignOut = async () => {
     console.log("Hello ");
@@ -22,7 +22,9 @@ function Header() {
                 <div className="border-[1px] border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
                   <span className="mb-[1px] text-violet-800">Sign out</span>
                 </div>
-                <i className="fas fa-sign-out-alt text-[12.5px] block sm:hidden" ></i>
+                <div className=" block sm:hidden">
+                  <i className="fas fa-sign-out-alt text-[12.5px]"></i>
+                </div>
               </div>
               : 
               <Link to = '/login'>
@@ -30,7 +32,9 @@ function Header() {
                   <div className="border-[1px] border-black rounded-[10px] bg-white px-2.5 py-1 hidden sm:block ">
                     <span className="mb-[1px] text-violet-800">Sign in</span>
                   </div>
-                  <i className="fas fa-sign-in-alt text-[12.5px] block sm:hidden" ></i>
+                  <div className=" block sm:hidden">
+                    <i className="fas fa-sign-in-alt text-[12.5px]"></i>
+                  </div>
                 </div>
               </Link>
             }</span>

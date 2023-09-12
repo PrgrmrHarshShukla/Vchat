@@ -29,7 +29,7 @@ db.once('open', () => console.log('Atlas connected.'))
 
 // Configure CORS 
 app.use(cors({
-    origin: 'https://fired-chat.netlify.app', 
+    origin: ['https://fired-chat.netlify.app', 'http://localhost:5173'], 
     methods: ['GET', 'POST'],
     allowedHeaders: ['Content-Type'],
     credentials: true,

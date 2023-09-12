@@ -48,14 +48,15 @@ router.post('/register', async (req, res) => {
             })
         }
         if(userExists2){
-            return res.status(400).json({
+            return res.status(401).json({
                 msg: "userName already in use."
             })
         }
 
         const newUser = await user.save();
-        res.status(200).json({
-            msg: 'New user registered.'
+        res.status(201).json({
+            msg: 'New user registered.',
+            "user": user
         })
     } 
     catch (error) {
@@ -67,8 +68,12 @@ router.post('/register', async (req, res) => {
 
 
 // Update one
-router.patch('/:id', getUser, async (req, res) => {
+router.patch('/:email', async (req, res) => {
     try {
+
+        const user = await Users.findOne({ email: req.params.email })
+        res.user = user;
+
         const newRoomsArray = [...res.user.rooms];
         newRoomsArray.push(req.body.newRoom);
 

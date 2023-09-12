@@ -6,11 +6,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 
 
-function Chat({ socket, username, room }) {
+function Chat({ socket, userName, room }) {
 
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState(
-    JSON.parse(localStorage.getItem(`${username}${room}`)) 
+    JSON.parse(localStorage.getItem(`${userName}${room}`)) 
     || 
     []
   );
@@ -21,7 +21,7 @@ function Chat({ socket, username, room }) {
       // console.log(currentMessage.timeStamp);
       const messageData = {
         room: room,
-        author: username,
+        author: userName,
         message: currentMessage,
         time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
       };
@@ -30,7 +30,7 @@ function Chat({ socket, username, room }) {
       // console.log("from Chat", socket.id);
       setMessageList(list => {
         localStorage.setItem(
-          `${username}${room}`,
+          `${userName}${room}`,
           JSON.stringify([...list, messageData])      
         );
 
@@ -43,7 +43,7 @@ function Chat({ socket, username, room }) {
 
 
   const handleReset = () => {
-    localStorage.removeItem(`${username}${room}`)
+    localStorage.removeItem(`${userName}${room}`)
     setMessageList([]);
   }
 
@@ -71,7 +71,7 @@ function Chat({ socket, username, room }) {
       <div className="h-[82vh] w-full bg-gray-200 border-t-2 border-b-2 border-black overflow-auto p-2">
         {messageList.map((messageContent) => {
           return (
-            username === messageContent.author ? (
+            userName === messageContent.author ? (
             <div key={uuidv4()} className="max-w-[1/2] flex flex-col justify-end items-end">
               <div className="flex flex-row gap-4 justify-start">
                 <h5 className="text-[12px]">{messageContent.time}</h5>

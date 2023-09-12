@@ -3,31 +3,33 @@ import { createSlice } from '@reduxjs/toolkit';
 const userSlice = createSlice({
     name: "user",
     initialState: {
-        value: localStorage.getItem('currentUserInfoFireChat') ?
-            JSON.parse(localStorage.getItem('currentUserInfoFireChat'))
+        value: localStorage.getItem('currentUserInfoFiredChat') ?
+            JSON.parse(localStorage.getItem('currentUserInfoFiredChat'))
             :
             {
                 userName: "",
                 email: "",
+                currentRoom: "",
                 rooms: []
             }
     },
     reducers: {
         setUser: (state, action) => {
             state.value = action.payload;
-            localStorage.setItem('currentUserInfoFireChat', JSON.stringify(action.payload));
+            localStorage.setItem('currentUserInfoFiredChat', JSON.stringify(action.payload));
         },
         clearUser: (state) => {
             state.value = {
                 userName: "",
                 email: "",
+                currentRoom: "",
                 rooms: []
             };
-            localStorage.removeItem('currentUserInfoFireChat');
+            localStorage.removeItem('currentUserInfoFiredChat');
         },
         updateUserRooms: (state, action) => {
             state.value.rooms.push(action.payload);
-            localStorage.setItem('currentUserInfoFireChat', JSON.stringify(state.value));            
+            localStorage.setItem('currentUserInfoFiredChat', JSON.stringify(state.value));            
         }
     }
 })
