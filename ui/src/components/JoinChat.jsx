@@ -93,7 +93,7 @@ function JoinChat() {
 
             <p className="font-semibold">userName</p>
             <input className="mb-4 p-1 rounded w-full border-2 border-black border-solid" type="text" defaultValue={user.userName} />
-            <p className="font-semibold">Chat Room</p>
+            <p className="font-semibold">Chat Room ID</p>
             <input className="mb-4 p-1 rounded w-full border-2 border-black border-solid" type="text" value={user.currentRoom} onChange={settingRoom} />
             <button 
               className=" rounded border-2 border-black border-solid mt-12 p-1 bg-blue-400  active:bg-blue-500" 
