@@ -15,6 +15,13 @@ function Chat({ socket, userName, room }) {
     []
   );
 
+  const scrollToBottom = () => {
+    setTimeout(() =>{
+      const container = document.getElementById('message-container')
+      container.scrollTop = container.scrollHeight;
+    }, 10)
+  }
+
 
   const sendMessage = async () => {
     if( currentMessage !== "" ) {
@@ -38,6 +45,10 @@ function Chat({ socket, userName, room }) {
       });
       
       setCurrentMessage("");
+      setTimeout(() =>{
+        const container = document.getElementById('message-container')
+        container.scrollTop = container.scrollHeight;
+      }, 10)
     }
   };
 
@@ -51,6 +62,10 @@ function Chat({ socket, userName, room }) {
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList(list => [...list, data]);
+      setTimeout(() =>{
+        const container = document.getElementById('message-container')
+        container.scrollTop = container.scrollHeight + 1000;
+      }, 10)
     });
   }, [socket]);
  
@@ -68,7 +83,7 @@ function Chat({ socket, userName, room }) {
 
 
 
-      <div className="h-[82vh] w-full bg-gray-200 border-t-2 border-b-2 border-black overflow-auto p-2">
+      <div id="message-container" className="h-[82vh] w-full bg-gray-200 border-t-2 border-b-2 border-black overflow-auto p-2 pb-[40px]">
         {messageList.map((messageContent) => {
           return (
             userName === messageContent.author ? (
@@ -110,8 +125,14 @@ function Chat({ socket, userName, room }) {
          />
          <button onClick = {sendMessage} title="Send" className=" flex justify-center items-center rounded-full w-[40px] bg-white text-[20px]">
             <i className="fas fa-paper-plane -ml-1"></i>
-            <span> </span>
          </button>
+         <button 
+          onClick = {scrollToBottom} 
+          id='scroll-to-bottom-button' 
+          className="absolute flex justify-center items-center rounded-full w-[40px] h-[40px] bg-sky-300 text-[20px] text-black translate-x-[80vw] sm:translate-x-[45vw] -translate-y-[10vh] sm:-translate-y-[8vh]"
+        >
+          <i className="fas fa-arrow-down"></i>
+        </button>
       </div>
     </div>
   )
