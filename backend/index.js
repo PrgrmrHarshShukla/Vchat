@@ -4,6 +4,7 @@ const app = express()
 const mongoose = require('mongoose');
 const passport = require('./utils/passport-config');
 const userRoutes = require('./routes/userRoutes')
+const messagesRoutes = require('./routes/messagesRoutes')
 require('dotenv').config()
 
 const http = require("http");
@@ -66,6 +67,7 @@ io.on("connection", (socket) => {
 
 
 app.use('/users', userRoutes)
+app.use('/messages', messagesRoutes)
 
 
 

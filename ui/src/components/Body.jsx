@@ -26,8 +26,8 @@ function Body() {
                 <ul className="text-3xl sm:text-4xl font-extrabold   text-violet-900">
                     <li>USER PRIVACY</li>
                 </ul>
-                <p className="text-gray-600 font-bold  text-lg sm:text-2xl">Our database does not even store your messages.</p>
-                <p className="text-gray-600 font-bold  text-lg sm:text-2xl">We do not need to know that!</p>
+                <p className="text-gray-600 font-bold  text-lg sm:text-2xl">We are planning to go Open Source!</p>
+                <p className="text-gray-600 font-bold  text-lg sm:text-2xl">As soon as possible.</p>
             </div>
         </div>
         <div className="flex flex-col justify-center items-center w-[90vw] sm:w-[48vw] gap-[3vh] pb-8 sm:pb-0  min-h-[110vh] sm:min-h-[90vh]">

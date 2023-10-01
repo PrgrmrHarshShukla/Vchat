@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid'
 
 
 import '@fortawesome/fontawesome-free/css/all.css'
-import { v4 as uuidv4 } from 'uuid'
 
 
 
@@ -31,7 +32,13 @@ function Chat({ socket, userName, room }) {
   const sendPendingMessages = async () => {
     for(let i = 0; i < pendingMessages.length; i++){
       await socket.emit("send_message", pendingMessages[i]);
+      await axios.post('https://vchat-backend-zv0s.onrender.com/messages', {
+        "sender": pendingMessages[i].author,
+        "room": pendingMessages[i].room,
+        "content": pendingMessages[i].message
+      })
     }
+
     localStorage.removeItem(`${userName}pending${room}`)
   }
 
@@ -55,6 +62,11 @@ function Chat({ socket, userName, room }) {
         //   pendingMessages.shift()
         // }
         await socket.emit("send_message", messageData);
+        await axios.post('https://vchat-backend-zv0s.onrender.com/messages', {
+          "sender": messageData.author,
+          "room": messageData.room,
+          "content": messageData.message
+        })
         
         setMessageList(list => {
           localStorage.setItem(
@@ -114,7 +126,8 @@ function Chat({ socket, userName, room }) {
             container.scrollTop = container.scrollHeight;
           }, 10)
         }
-  };
+      }
+  }
 
 
   const handleReset = () => {
