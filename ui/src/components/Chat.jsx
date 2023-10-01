@@ -130,9 +130,13 @@ function Chat({ socket, userName, room }) {
   }
 
 
-  const handleReset = () => {
+  const handleReset = async () => {
     localStorage.removeItem(`${userName}${room}`)
     setMessageList([]);
+    await axios.delete('https://vchat-backend-zv0s.onrender.com/messages', {
+      "sender": userName,
+      "room": room
+    })
   }
 
 

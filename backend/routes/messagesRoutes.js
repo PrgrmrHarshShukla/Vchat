@@ -39,6 +39,24 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.delete('/', async (req, res) => {
+    try {
+        const filter = {
+            sender: req.body.sender,
+            room: req.body.room
+        }
+        await Messages.deleteMany(filter)        
+        res.status(200).json({
+            msg: "Messages deleted."
+        })
+    } 
+    catch (error) {
+        res.status(500).json({
+            msg: error.message
+        })    
+    }
+})
+
 
 
 module.exports = router;
