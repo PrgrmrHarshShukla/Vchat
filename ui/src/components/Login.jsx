@@ -30,6 +30,10 @@ function Login() {
         alert(`Please fill all the details!`);
         return;
       }
+      if( navigator.onLine == false ){
+        alert(`Oops!\nYou seem to be offline!\nPlease reconnect to login.`);
+        return;
+      }
 
       const response = await axios.post('https://vchat-backend-zv0s.onrender.com/users/login', userDataPostRequest);
       // console.log(response);

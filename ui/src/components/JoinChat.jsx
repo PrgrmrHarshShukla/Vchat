@@ -14,6 +14,7 @@ import axios from 'axios';
 function JoinChat() {
 
   const user = useSelector(state => state.user.value)
+  const isOnline = navigator.onLine;
   
   const [showChat, setShowChat] = useState(false);
 
@@ -70,8 +71,14 @@ function JoinChat() {
  
   async function joinRoom () {
     if( user.currentRoom !== "" && user.userName !== "" ){ 
-      socket.emit("join_room", user.currentRoom);
-      setShowChat(true);
+      if(isOnline){
+        socket.emit("join_room", user.currentRoom);
+        setShowChat(true);
+      }
+      else{
+        alert('You seem to be offline!\nPlease reconnect to join room.')
+        return;
+      }
     }
     else{
       alert("Please fill the details.")

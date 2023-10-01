@@ -40,6 +40,10 @@ function Register() {
         alert(`Please fill all the details!`);
         return;
       }
+      if( navigator.onLine == false ){
+        alert(`Oops!\nYou seem to be offline!\nPlease reconnect to register.`);
+        return;
+      }
   
       const response = await axios.post('https://vchat-backend-zv0s.onrender.com/users/register', userDataPostRequest);
 

@@ -8,12 +8,18 @@ import { v4 as uuidv4 } from 'uuid'
 
 function Chat({ socket, userName, room }) {
 
+  const [onlineStatus, setOnlineStatus] = useState(navigator.onLine);
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState(
     JSON.parse(localStorage.getItem(`${userName}${room}`)) 
     || 
     []
   );
+  const [pendingMessages, setPendingMessages] = useState(
+    JSON.parse(localStorage.getItem(`${userName}pending${room}`)) 
+    || 
+    []
+  )
 
   const scrollToBottom = () => {
     setTimeout(() =>{
@@ -22,34 +28,92 @@ function Chat({ socket, userName, room }) {
     }, 10)
   }
 
+  const sendPendingMessages = async () => {
+    for(let i = 0; i < pendingMessages.length; i++){
+      await socket.emit("send_message", pendingMessages[i]);
+    }
+    localStorage.removeItem(`${userName}pending${room}`)
+  }
+
+
+
 
   const sendMessage = async () => {
-    if( currentMessage !== "" ) {
-      // console.log(currentMessage.timeStamp);
-      const messageData = {
-        room: room,
-        author: userName,
-        message: currentMessage,
-        time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
-      };
+    if(navigator.onLine){
+      if( currentMessage !== "" ) {
+        // console.log(currentMessage.timeStamp);
+        const messageData = {
+          room: room,
+          author: userName,
+          message: currentMessage,
+          time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+          status: "send"
+        };
 
-      await socket.emit("send_message", messageData);
-      // console.log("from Chat", socket.id);
-      setMessageList(list => {
-        localStorage.setItem(
-          `${userName}${room}`,
-          JSON.stringify([...list, messageData])      
-        );
+        // for(let i = 0; i < pendingMessages.length; i++){
+        //   await socket.emit("send_message", pendingMessages[i]);
+        //   pendingMessages.shift()
+        // }
+        await socket.emit("send_message", messageData);
+        
+        setMessageList(list => {
+          localStorage.setItem(
+            `${userName}${room}`,
+            JSON.stringify([...list, messageData])      
+          );
 
-        return [...list, messageData];
-      });
-      
-      setCurrentMessage("");
-      setTimeout(() =>{
-        const container = document.getElementById('message-container')
-        container.scrollTop = container.scrollHeight;
-      }, 10)
-    }
+          return [...list, messageData];
+        });
+
+        
+        
+        setCurrentMessage("");
+        setTimeout(() =>{
+          const container = document.getElementById('message-container')
+          container.scrollTop = container.scrollHeight;
+        }, 10)
+        }
+      }
+      else{
+        if( currentMessage !== "" ) {
+          // console.log(currentMessage.timeStamp);
+          const messageData = {
+            room: room,
+            author: userName,
+            message: currentMessage,
+            time: new Date(Date.now()).getHours() + ":" + new Date(Date.now()).getMinutes(),
+            status: "pending"
+          };
+
+          
+    
+          setMessageList(list => {
+            localStorage.setItem(
+              `${userName}${room}`,
+              JSON.stringify([...list, messageData])      
+            );
+    
+            return [...list, messageData];
+          });
+
+          setPendingMessages(list => {
+            localStorage.setItem(
+              `${userName}pending${room}`,
+              JSON.stringify([...list, messageData])      
+            );
+
+
+            return [...list, messageData]
+          })
+
+
+          
+          setCurrentMessage("");
+          setTimeout(() =>{
+            const container = document.getElementById('message-container')
+            container.scrollTop = container.scrollHeight;
+          }, 10)
+        }
   };
 
 
@@ -64,10 +128,32 @@ function Chat({ socket, userName, room }) {
       setMessageList(list => [...list, data]);
       setTimeout(() =>{
         const container = document.getElementById('message-container')
-        container.scrollTop = container.scrollHeight + 1000;
+        container.scrollTop = container.scrollHeight;
       }, 10)
     });
+    
   }, [socket]);
+
+  useEffect(() => {
+    sendPendingMessages()
+  }, [onlineStatus])
+
+
+  useEffect(() => {
+    const handleOnlineStatusChange = () => {
+      setOnlineStatus(navigator.onLine);
+    };
+
+    
+    window.addEventListener('online', handleOnlineStatusChange);
+    window.addEventListener('offline', handleOnlineStatusChange);
+
+    
+    return () => {
+      window.removeEventListener('online', handleOnlineStatusChange);
+      window.removeEventListener('offline', handleOnlineStatusChange);
+    };
+  }, []);
  
 
   return (
