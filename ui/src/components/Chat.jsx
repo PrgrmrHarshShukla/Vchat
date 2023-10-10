@@ -32,11 +32,11 @@ function Chat({ socket, userName, room }) {
   const sendPendingMessages = async () => {
     for(let i = 0; i < pendingMessages.length; i++){
       await socket.emit("send_message", pendingMessages[i]);
-      await axios.post('https://vchat-backend-zv0s.onrender.com/messages', {
-        "sender": pendingMessages[i].author,
-        "room": pendingMessages[i].room,
-        "content": pendingMessages[i].message
-      })
+      // await axios.post('https://vchat-backend-zv0s.onrender.com/messages', {
+      //   "sender": pendingMessages[i].author,
+      //   "room": pendingMessages[i].room,
+      //   "content": pendingMessages[i].message
+      // })
     }
 
     localStorage.removeItem(`${userName}pending${room}`)
@@ -62,11 +62,11 @@ function Chat({ socket, userName, room }) {
         //   pendingMessages.shift()
         // }
         await socket.emit("send_message", messageData);
-        await axios.post('https://vchat-backend-zv0s.onrender.com/messages', {
-          "sender": messageData.author,
-          "room": messageData.room,
-          "content": messageData.message
-        })
+        // await axios.post('https://vchat-backend-zv0s.onrender.com/messages', {
+        //   "sender": messageData.author,
+        //   "room": messageData.room,
+        //   "content": messageData.message
+        // })
         
         setMessageList(list => {
           localStorage.setItem(
@@ -133,10 +133,10 @@ function Chat({ socket, userName, room }) {
   const handleReset = async () => {
     localStorage.removeItem(`${userName}${room}`)
     setMessageList([]);
-    await axios.delete('https://vchat-backend-zv0s.onrender.com/messages', {
-      "sender": userName,
-      "room": room
-    })
+    // await axios.delete('https://vchat-backend-zv0s.onrender.com/messages', {
+    //   "sender": userName,
+    //   "room": room
+    // })
   }
 
 
