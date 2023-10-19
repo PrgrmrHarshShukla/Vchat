@@ -36,7 +36,7 @@ function Login() {
         return;
       }
 
-      const response = await axios.post(`${process.env.REACT_APP_b_url}/users/login`, userDataPostRequest);
+      const response = await axios.post(`${process.env.REACT_APP_B_URL}/users/login`, userDataPostRequest);
       // console.log(response);
 
       if(response.status == 200){
