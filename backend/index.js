@@ -13,11 +13,10 @@ const server = http.createServer(app);
 const io = socketIo(server)
 
 const PORT = process.env.PORT || 5000
+const DATABASE_URL = process.env.DATABASE_URL
 
 
-
-
-mongoose.connect('mongodb+srv://hbeyondall1:cluster2vChat@cluster2.tkwewyu.mongodb.net/vChat?retryWrites=true&w=majority',  { 
+mongoose.connect(DATABASE_URL,  { 
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
