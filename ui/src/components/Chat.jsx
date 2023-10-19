@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid'
-import b_url from './Credentials';
+// import b_url from './Credentials';
 
 
 import '@fortawesome/fontawesome-free/css/all.css'
@@ -33,7 +33,7 @@ function Chat({ socket, userName, room }) {
   const sendPendingMessages = async () => {
     for(let i = 0; i < pendingMessages.length; i++){
       await socket.emit("send_message", pendingMessages[i]);
-      // await axios.post(`${b_url}/messages`, {
+      // await axios.post(`${process.env.b_url}/messages`, {
       //   "sender": pendingMessages[i].author,
       //   "room": pendingMessages[i].room,
       //   "content": pendingMessages[i].message
@@ -63,7 +63,7 @@ function Chat({ socket, userName, room }) {
         //   pendingMessages.shift()
         // }
         await socket.emit("send_message", messageData);
-        // await axios.post(`${b_url}/messages`, {
+        // await axios.post(`${process.env.b_url}/messages`, {
         //   "sender": messageData.author,
         //   "room": messageData.room,
         //   "content": messageData.message
@@ -134,7 +134,7 @@ function Chat({ socket, userName, room }) {
   const handleReset = async () => {
     localStorage.removeItem(`${userName}${room}`)
     setMessageList([]);
-    // await axios.delete(`${b_url}/messages`, {
+    // await axios.delete(`${process.env.b_url}/messages`, {
     //   "sender": userName,
     //   "room": room
     // })
