@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../slices/userSlice'
-// import b_url from './Credentials';
+import b_url from './Credentials';
 import { Link, useNavigate } from "react-router-dom";
 
 function Register() {
@@ -45,7 +45,7 @@ function Register() {
         return;
       }
   
-      const response = await axios.post(`https://vchat-backend-zv0s.onrender.com/users/register`, userDataPostRequest);
+      const response = await axios.post(`${b_url}/users/register`, userDataPostRequest);
 
       if( response.status === 400 ){
         alert(`Email already in use. \nPlease provide a different email.`)

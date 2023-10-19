@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
-// import b_url from './Credentials'
+import b_url from './Credentials'
 import { useDispatch } from 'react-redux';
 import { setUser } from '../slices/userSlice'
 
@@ -36,7 +36,7 @@ function Login() {
         return;
       }
 
-      const response = await axios.post(`https://vchat-backend-zv0s.onrender.com/users/login`, userDataPostRequest);
+      const response = await axios.post(`${b_url}/users/login`, userDataPostRequest);
       // console.log(response);
 
       if(response.status == 200){
