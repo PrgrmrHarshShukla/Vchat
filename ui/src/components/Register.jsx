@@ -45,7 +45,7 @@ function Register() {
         return;
       }
   
-      const response = await axios.post(`${process.env.REACT_APP_B_URL}/users/register`, userDataPostRequest);
+      const response = await axios.post(`https://vchat-backend-zv0s.onrender.com/users/register`, userDataPostRequest);
 
       if( response.status === 400 ){
         alert(`Email already in use. \nPlease provide a different email.`)

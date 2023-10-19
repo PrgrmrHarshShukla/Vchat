@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import b_url from './Credentials'
 import io from "socket.io-client";
-const socket = io(`${process.env.REACT_APP_B_URL}`, {
+const socket = io(`https://vchat-backend-zv0s.onrender.com`, {
     transports: ['websocket'], // Use WebSocket transport
 });
 
@@ -41,7 +41,7 @@ function JoinChat() {
       "newRoom": user.currentRoom
     }
     try{   
-      const response = await axios.patch(`${process.env.REACT_APP_B_URL}/users/${user.email}`, userDataPatchRequest);
+      const response = await axios.patch(`https://vchat-backend-zv0s.onrender.com/users/${user.email}`, userDataPatchRequest);
       dispatch(setUser({
         userName: user.userName,
         email: user.email,
