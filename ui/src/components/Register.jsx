@@ -45,7 +45,7 @@ function Register() {
         return;
       }
   
-      const response = await axios.post(`${process.env.b_url}/users/register`, userDataPostRequest);
+      const response = await axios.post(`${process.env.REACT_APP_b_url}/users/register`, userDataPostRequest);
 
       if( response.status === 400 ){
         alert(`Email already in use. \nPlease provide a different email.`)
