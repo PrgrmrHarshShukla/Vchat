@@ -181,7 +181,7 @@ function Chat({ socket, userName, room }) {
           <strong><h1>FiredChat</h1></strong>
          </div>
          <div title="Reset Chat" onClick={handleReset}>
-          <i className="fas fa-trash active:translate-y-[5px]"></i>
+          <i title="Clear chat" className="fas fa-trash active:translate-y-[5px]"></i>
          </div>
       </div>
 
