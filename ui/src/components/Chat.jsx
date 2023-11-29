@@ -221,15 +221,17 @@ function Chat({ socket, userName, room }) {
 
       <div className="h-[8vh] w-full flex flex-row justify-between p-2 border-t-[1px] border-black bg-teal-300">
          <input 
-          className="border-none rounded text-[20px] p-1 w-10/12 bg-slate-200"
+          className="border-none rounded text-[20px] h-[35px] p-1 w-10/12 bg-slate-200"
           type="text" 
           placeholder="Message..." 
           onChange = {(e) => {setCurrentMessage(e.target.value)}}
           value={currentMessage}
          />
-         <button onClick = {sendMessage} title="Send" className=" flex justify-center items-center rounded-full w-[40px] bg-white text-[20px]">
-            <i className="fas fa-paper-plane -ml-1"></i>
-         </button>
+         <div className=" flex justify-center items-center rounded-full h-[40px] w-[40px] bg-white text-[20px]">
+          <button onClick = {sendMessage} title="Send" >
+              <i className="fas fa-paper-plane -ml-1"></i>
+          </button>
+         </div>
          <button 
           onClick = {scrollToBottom} 
           id='scroll-to-bottom-button' 
